@@ -29,9 +29,9 @@ const quadro = document.querySelector('.quadro');
 indice = 0;
 
 while(indice<numeroCartas){
-    quadro.innerHTML += `<button onclick="virarCarta(this)" class="carta">
-    <div class="frente card"> <img src="${listaGifs2[indice]}"></div>
-    <div class="verso card">
+    quadro.innerHTML += `<button data-test="card" onclick="virarCarta(this)" class="carta">
+    <div data-test="face-up-image" class="frente card"> <img src="${listaGifs2[indice]}"></div>
+    <div data-test="face-down-image" class="verso card">
         <img src="./img/back.png">
     </div>
     </button>`;
