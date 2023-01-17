@@ -1,8 +1,10 @@
+* {
+	box-sizing: border-box;
+}
 body{
-    box-sizing: border-box;
-    /*display: flex;
+    display: flex;
     flex-direction: column;
-    align-items: center;*/
+    align-items: center;
 
     background-color: #eef9bf;
     /*rgba(237, 245, 112, 0.8);*/
@@ -34,11 +36,14 @@ h1{
 }
 .quadro{
     margin-top: 200px;
-    width: 100%;
+    width: 90%;
+
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+
+    padding: 0 10%;
 
 }
 .carta{
@@ -50,7 +55,7 @@ h1{
     border: none;
 
     margin-bottom: 34px;
-    margin-left: 34px;
+    /*margin-left: 34px;*/
     border-radius: 6px;
 
     position: relative;

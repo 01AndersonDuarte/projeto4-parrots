@@ -1,3 +1,10 @@
+/*
+const listaGifs=[
+    './img/edwardelric.gif', './img/joey.gif', './img/levi.gif', 
+    './img/naruto.gif', './img/nightking.gif', './img/queen.gif', 
+    './img/witcher.gif']
+*/
+
 const listaGifs=[
     './img/bobrossparrot.gif', './img/explodyparrot.gif', './img/fiestaparrot.gif', 
     './img/metalparrot.gif', './img/revertitparrot.gif', './img/tripletsparrot.gif', 
@@ -59,7 +66,6 @@ function desabilitarBotao(cartaParaDesabilitar){
     }
     alert("Chamou retirarOnclick");*/
     cartaParaDesabilitar.parentNode.toggleAttribute('disabled');
-    console.log(cartaParaDesabilitar.parentNode);
 }
 let cartasViradas=0;
 let quantidadeDeJogadas=0;
