@@ -8,43 +8,56 @@ const listaGifs=[
 const listaGifs=[
     './img/bobrossparrot.gif', './img/explodyparrot.gif', './img/fiestaparrot.gif', 
     './img/metalparrot.gif', './img/revertitparrot.gif', './img/tripletsparrot.gif', 
-    './img/unicornparrot.gif']
+    './img/unicornparrot.gif'];
+
+const listaGifs2=[];
+let numeroCartas;
+
+let cartasViradas=0;
+let quantidadeDeJogadas=0;
+let quantidadeDeAcertos=0;
+let viradasRecentementeFrente = [];
+let viradasRecentementeVerso = [];
+
+function iniciar(){
+    numeroCartas = prompt("Informe a quantidade de cartas: ");
+    while(numeroCartas%2!==0 || numeroCartas<4 || numeroCartas>14){
+        alert("Quantidade informada inválida, por favor digite um novo valor: ");
+        numeroCartas = prompt("Quantidade de cartas: ");
+    }
+    criarBaralho();
+}
+iniciar();
 
 function comparador() { 
     return Math.random() - 0.5; 
 }
 
-listaGifs.sort(comparador);
+function criarBaralho(){
+    listaGifs.sort(comparador);
 
+    for(let i=0; i<(numeroCartas/2); i++){
+        listaGifs2.push(listaGifs[i]);
+        listaGifs2.push(listaGifs[i]);
+    }
 
-const listaGifs2=[];
-
-let numeroCartas = prompt("Informe a quantidade de cartas: ");
-while(numeroCartas%2!==0 || numeroCartas<4 || numeroCartas>14){
-    alert("Quantidade informada inválida, por favor digite um novo valor: ");
-    numeroCartas = prompt("Quantidade de cartas: ");
+    listaGifs2.sort(comparador);
+    insereCartas();
 }
-let indice = 0;
-while(indice<(numeroCartas/2)){
-    listaGifs2.push(listaGifs[indice]);
-    listaGifs2.push(listaGifs[indice]);
-    indice++;
+
+function insereCartas(){
+    const quadro = document.querySelector('.quadro');
+
+    for(let i=0; i<numeroCartas; i++){        
+        quadro.innerHTML += `<button data-test="card" onclick="virarCarta(this)" class="carta">
+        <div data-test="face-up-image" class="frente card"> <img src="${listaGifs2[i]}"></div>
+        <div data-test="face-down-image" class="verso card">
+            <img src="./img/back.png">
+        </div>
+        </button>`;
+    }
 }
-listaGifs2.sort(comparador);
 
-const quadro = document.querySelector('.quadro');
-indice = 0;
-
-while(indice<numeroCartas){
-    quadro.innerHTML += `<button data-test="card" onclick="virarCarta(this)" class="carta">
-    <div data-test="face-up-image" class="frente card"> <img src="${listaGifs2[indice]}"></div>
-    <div data-test="face-down-image" class="verso card">
-        <img src="./img/back.png">
-    </div>
-    </button>`;
-
-    indice++;
-}
 
 function desvirar(){
     
@@ -56,22 +69,11 @@ function desvirar(){
     viradasRecentementeFrente = [];
     viradasRecentementeVerso = [];
     cartasViradas=0;
-
-
 }
+
 function desabilitarBotao(cartaParaDesabilitar){
-    /*for(let i=0; i<cartaParaDesabilitar.length; i++){
-        cartaParaDesabilitar[i].parentNode.removeAttribute('onclick');
-        console.log(cartaParaDesabilitar[i].parentNode);
-    }
-    alert("Chamou retirarOnclick");*/
     cartaParaDesabilitar.parentNode.toggleAttribute('disabled');
 }
-let cartasViradas=0;
-let quantidadeDeJogadas=0;
-let quantidadeDeAcertos=0;
-let viradasRecentementeFrente = [];
-let viradasRecentementeVerso = [];
 
 function virarCarta(cartaSelecionada){
     quantidadeDeJogadas++;
@@ -85,8 +87,6 @@ function virarCarta(cartaSelecionada){
 
         viradasRecentementeFrente.push(cartaFrente);
         viradasRecentementeVerso.push(cartaVerso);
-        
-
 
 
         cartaFrente.classList.add("carta-frente");
@@ -119,6 +119,16 @@ function virarCarta(cartaSelecionada){
     }
     
 }
+
 function fim(){
     alert(`Você ganhou em ${quantidadeDeJogadas} jogadas!`);
+    document.querySelector('.overlay').classList.remove('escondido');
+}
+
+function reiniciarOuEncerrar(opcaoEscolhida){
+    if(opcaoEscolhida.classList.contains('botaoSim')){
+        window.location.reload(true);
+    }else{
+        document.querySelector('.overlay').classList.add('escondido');
+    }
 }
